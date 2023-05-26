@@ -12,5 +12,11 @@ export default function Layout() {
     return null;
   }
 
-  return <Stack />;
+  return (
+    <Stack
+      screenOptions={{
+        headerTitle: "",
+      }}
+    />
+  );
 }
