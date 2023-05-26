@@ -1,10 +1,13 @@
-import { View, Text, TextInput, Pressable } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
+import { Stack, useRouter } from "expo-router";
 
 export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const router = useRouter();
 
   const {
     control,
@@ -18,80 +21,126 @@ export default function SignUp() {
     },
   });
 
+  const submitHandler = () => {
+    router.push("/");
+  };
+
   return (
-    <View className='flex-1 justify-center px-5 bg-red-500'>
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder='Name'
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            className='my-2 bg-white rounded mb-1 py-2'
-          />
-        )}
-        name='name'
-      />
-      {errors.name && <Text>Enter name</Text>}
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder='Email'
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            className='bg-white rounded mb-1 py-2'
-          />
-        )}
-        name='email'
-      />
-      {errors.email && <Text>Enter email</Text>}
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <View className='bg-white rounded py-2 px-1 flex-1 justify-between'>
+    <SafeAreaView className='flex-1 bg-white'>
+      <Stack.Screen options={{ headerShadowVisible: false }} />
+
+      <View className='flex-1 p-4 absolute top-[10%]'>
+        <View className='mb-10'>
+          <Text className='text-2xl font-bold text-gray-800'>Sign Up</Text>
+        </View>
+        <Controller
+          control={control}
+          rules={{
+            required: "Name is required",
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              placeholder='Password'
+              placeholder='Name'
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              className={`rounded-lg p-2 border ${
+                errors.name ? "border-red-500" : "border-gray-300"
+              } focus:border-blue-500`}
             />
-            <Pressable>
-              <Ionicons
-                name={passwordVisible ? "eye-off-outline" : "eye-outline"}
-                size={24}
-                color='black'
+          )}
+          name='name'
+        />
+        {errors.name && (
+          <Text className='text-red-500'>{errors.name.message}</Text>
+        )}
+        <Controller
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: "Invalid email format",
+            },
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              placeholder='Email'
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              className={`rounded-lg mt-3 p-2 border ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } focus:border-blue-500`}
+            />
+          )}
+          name='email'
+        />
+        {errors.email && (
+          <Text className='text-red-500'>{errors.email.message}</Text>
+        )}
+        <Controller
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <View className='flex flex-row items-center justify-between mt-3'>
+              <TextInput
+                placeholder='Password'
+                onBlur={onBlur}
+                secureTextEntry={!passwordVisible}
+                onChangeText={onChange}
+                value={value}
+                className={`w-full h-full rounded-lg p-2 border ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                } focus:border-blue-500`}
               />
+              <Pressable
+                onPress={() => setPasswordVisible((prevValue) => !prevValue)}
+                className='absolute right-0 mr-2'
+              >
+                <Ionicons
+                  name={passwordVisible ? "eye-off-outline" : "eye-outline"}
+                  size={20}
+                  color='gray'
+                />
+              </Pressable>
+            </View>
+          )}
+          name='password'
+        />
+        {errors.password && (
+          <Text className='text-red-500'>{errors.password.message}</Text>
+        )}
+
+        <View className='mt-8'>
+          <View>
+            <Pressable
+              className='bg-blue-600 py-3 rounded-lg'
+              onPress={handleSubmit(submitHandler)}
+            >
+              <Text className='text-white text-center font-semibold text-lg'>
+                Sign Up
+              </Text>
             </Pressable>
           </View>
-        )}
-        name='password'
-      />
-      {errors.password && <Text>Enter password</Text>}
 
-      <View>
-        <View className='mt-4'>
-          <Pressable className='bg-blue-600 py-3 rounded'>
-            <Text className='text-white text-center'>Sign Up</Text>
-          </Pressable>
-        </View>
-
-        <View className='flex-row justify-center mt-3'>
-          <Text>Already have an account?</Text>
-          <Text className='ml-1 text-blue-600'>Sign in</Text>
+          <View className='flex-row justify-center mt-5'>
+            <Text>Already have an account?</Text>
+            <Text
+              onPress={() => router.push("auth/login")}
+              className='ml-1 text-blue-600'
+            >
+              Log in
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
