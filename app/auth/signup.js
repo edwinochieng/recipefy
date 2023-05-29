@@ -3,6 +3,8 @@ import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../firebaseConfig";
 
 export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -21,8 +23,19 @@ export default function SignUp() {
     },
   });
 
-  const submitHandler = () => {
-    router.push("/");
+  const handleSignUp = ({ name, email, password }) => {
+    const auth = getAuth(app);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        router.push("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
@@ -122,7 +135,7 @@ export default function SignUp() {
           <View>
             <Pressable
               className='bg-blue-600 py-3 rounded-lg'
-              onPress={handleSubmit(submitHandler)}
+              onPress={handleSubmit(handleSignUp)}
             >
               <Text className='text-white text-center font-semibold text-lg'>
                 Sign Up
