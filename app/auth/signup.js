@@ -3,8 +3,9 @@ import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../../firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
+import { auth, db } from "../../firebaseConfig";
 
 export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -23,19 +24,28 @@ export default function SignUp() {
     },
   });
 
-  const handleSignUp = ({ name, email, password }) => {
-    const auth = getAuth(app);
+  const handleSignUp = async ({ name, email, password }) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
-        router.push("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      const userRef = await addDoc(collection(db, "users"), {
+        name: name,
+        email: email,
+        userId: user.uid,
       });
+      console.log("signed in");
+      router.push("/");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      console.log(errorMessage);
+    }
   };
 
   return (
@@ -71,10 +81,6 @@ export default function SignUp() {
           control={control}
           rules={{
             required: "Email is required",
-            pattern: {
-              value: /^\S+@\S+$/i,
-              message: "Invalid email format",
-            },
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
