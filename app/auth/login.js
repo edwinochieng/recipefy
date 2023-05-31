@@ -3,6 +3,8 @@ import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 export default function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -20,8 +22,17 @@ export default function Login() {
     },
   });
 
-  const submitHandler = () => {
-    router.push("/");
+  const handleLogin = ({ email, password }) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        router.push("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
@@ -37,10 +48,6 @@ export default function Login() {
           control={control}
           rules={{
             required: "Email is required",
-            pattern: {
-              value: /^\S+@\S+$/i,
-              message: "Invalid email format",
-            },
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -101,7 +108,7 @@ export default function Login() {
           <View>
             <Pressable
               className='bg-blue-600 py-3 rounded-lg'
-              onPress={handleSubmit(submitHandler)}
+              onPress={handleSubmit(handleLogin)}
             >
               <Text className='text-white text-center font-semibold text-lg'>
                 Sign Up
