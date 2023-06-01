@@ -1,10 +1,13 @@
-import { View, Text } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import React from "react";
+import Search from "../../components/Search";
+import Categories from "../../components/Categories";
 
 export default function Home() {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <SafeAreaView className='flex-1 '>
+      <Search />
+      <Categories />
+    </SafeAreaView>
   );
 }
