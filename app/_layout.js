@@ -13,10 +13,8 @@ export default function Layout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerTitle: "",
-      }}
-    />
+    <Stack>
+      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+    </Stack>
   );
 }
