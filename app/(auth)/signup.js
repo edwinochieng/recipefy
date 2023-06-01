@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import app from "../../firebaseConfig";
@@ -51,8 +51,6 @@ export default function SignUp() {
 
   return (
     <SafeAreaView className='flex-1 bg-white'>
-      <Stack.Screen options={{ headerShadowVisible: false }} />
-
       <View className='flex-1 p-4 absolute top-[10%]'>
         <View className='mb-10'>
           <Text className='text-2xl font-bold text-gray-800'>Sign Up</Text>
