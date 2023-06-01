@@ -25,6 +25,15 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name='saved'
+        options={{
+          tabBarLabel: "Saved",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='md-bookmark' size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name='profile'
         options={{
           tabBarLabel: "Profile",
