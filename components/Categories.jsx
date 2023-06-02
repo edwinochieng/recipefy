@@ -51,9 +51,11 @@ const categories = [
 ];
 export default function Categories() {
   return (
-    <View className='my-4'>
-      <Text className='font-poppins-bold text-lg'>Categories</Text>
-      <View className='mt-2'>
+    <View className='absolute left-4 top-36 mt-8 right-0  '>
+      <Text className='font-poppins-bold text-lg text-gray-700'>
+        Categories
+      </Text>
+      <View className='mt-2 flex-row '>
         <FlatList
           data={categories}
           renderItem={({ item }) => (
