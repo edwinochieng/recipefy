@@ -1,44 +1,74 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 import React from "react";
-import cake from "../assets/icons/";
 
 const categories = [
   {
     name: "Breakfast",
     slug: "breakfast",
-    image: "../assets/icons/breakfast.png",
+    image: require("../assets/icons/breakfast.png"),
   },
   {
     name: "Salad",
     slug: "salad",
-    image: "../assets/icons/salad.png",
+    image: require("../assets/icons/salad.png"),
+  },
+  {
+    name: "Appetizers",
+    slug: "appetizer",
+    image: require("../assets/icons/appetizer.png"),
   },
   {
     name: "Main course",
     slug: "main course",
-    image: "../assets/icons/meal.png",
+    image: require("../assets/icons/meal.png"),
+  },
+  {
+    name: "Beverage",
+    slug: "beverage",
+    image: require("../assets/icons/beverage.png"),
   },
   {
     name: "Dessert",
     slug: "dessert",
-    image: "../assets/icons/dessert.png",
+    image: require("../assets/icons/dessert.png"),
   },
 
   {
     name: "Soup",
     slug: "soup",
-    image: "../assets/icons/soup.png",
+    image: require("../assets/icons/soup.png"),
   },
   {
     name: "Drinks",
     slug: "drink",
-    image: "../assets/icons/cocktail.png",
+    image: require("../assets/icons/cocktail.png"),
+  },
+  {
+    name: "Snacks",
+    slug: "snack",
+    image: require("../assets/icons/snack.png"),
   },
 ];
 export default function Categories() {
   return (
-    <View>
-      <Text>Categories</Text>
+    <View className='my-4'>
+      <Text className='font-poppins-bold text-lg'>Categories</Text>
+      <View className='mt-2'>
+        <FlatList
+          data={categories}
+          renderItem={({ item }) => (
+            <View className='bg-gray-300 rounded-lg mr-2 items-center justify-center w-[70px] py-2'>
+              <Image source={item.image} className='w-[25px] h-[25px]' />
+              <Text className='font-poppins-medium text-gray-700 text-xs mt-1'>
+                {item.name}
+              </Text>
+            </View>
+          )}
+          keyExtractor={(item) => item.name}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
     </View>
   );
 }
