@@ -6,7 +6,7 @@ export default function Search() {
   const [query, setQuery] = useState();
 
   return (
-    <View>
+    <View className='p-4'>
       <View>
         <Text className='text-gray-500 font-poppins-medium text-base mb-1'>
           Hello Edwin
