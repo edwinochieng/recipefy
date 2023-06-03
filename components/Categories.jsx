@@ -51,7 +51,7 @@ const categories = [
 ];
 export default function Categories() {
   return (
-    <View className='absolute left-4 top-36 mt-8 right-0  '>
+    <View className='absolute left-4 top-36 mt-10 right-0  '>
       <Text className='font-poppins-bold text-lg text-gray-700'>
         Categories
       </Text>
