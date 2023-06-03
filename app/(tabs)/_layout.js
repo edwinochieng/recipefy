@@ -5,20 +5,19 @@ import { Octicons } from "@expo/vector-icons";
 
 export default function Layout() {
   return (
-    <Tabs>
+    <Tabs screenOptions={{ tabBarShowLabel: false }}>
       <Tabs.Screen
         name='home'
         options={{
-          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
             <Octicons name='home' size={size} color={color} />
           ),
+          headerTitle: "",
         }}
       />
       <Tabs.Screen
         name='search'
         options={{
-          tabBarLabel: "Search",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='search-outline' size={size} color={color} />
           ),
@@ -27,7 +26,6 @@ export default function Layout() {
       <Tabs.Screen
         name='saved'
         options={{
-          tabBarLabel: "Saved",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='md-bookmark' size={size} color={color} />
           ),
@@ -36,7 +34,6 @@ export default function Layout() {
       <Tabs.Screen
         name='profile'
         options={{
-          tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name='account' size={size} color={color} />
           ),
