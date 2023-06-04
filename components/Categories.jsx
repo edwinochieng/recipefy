@@ -1,54 +1,6 @@
 import { View, Text, FlatList, Image } from "react-native";
-import React from "react";
+import categories from "../assets/categories";
 
-const categories = [
-  {
-    name: "Breakfast",
-    slug: "breakfast",
-    image: require("../assets/icons/breakfast.png"),
-  },
-  {
-    name: "Salad",
-    slug: "salad",
-    image: require("../assets/icons/salad.png"),
-  },
-  {
-    name: "Appetizers",
-    slug: "appetizer",
-    image: require("../assets/icons/appetizer.png"),
-  },
-  {
-    name: "Main course",
-    slug: "main course",
-    image: require("../assets/icons/meal.png"),
-  },
-  {
-    name: "Beverage",
-    slug: "beverage",
-    image: require("../assets/icons/beverage.png"),
-  },
-  {
-    name: "Dessert",
-    slug: "dessert",
-    image: require("../assets/icons/dessert.png"),
-  },
-
-  {
-    name: "Soup",
-    slug: "soup",
-    image: require("../assets/icons/soup.png"),
-  },
-  {
-    name: "Drinks",
-    slug: "drink",
-    image: require("../assets/icons/cocktail.png"),
-  },
-  {
-    name: "Snacks",
-    slug: "snack",
-    image: require("../assets/icons/snack.png"),
-  },
-];
 export default function Categories() {
   return (
     <View className='pl-4 mt-4'>
