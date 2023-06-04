@@ -1,17 +1,23 @@
 import { Tabs } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { Octicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 export default function Layout() {
   return (
-    <Tabs screenOptions={{ tabBarShowLabel: false }}>
+    <Tabs
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
+      }}
+    >
       <Tabs.Screen
         name='home'
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Octicons name='home' size={size} color={color} />
+            <Entypo name='home' size={size} color={color} />
           ),
+
           headerTitle: "",
         }}
       />
@@ -27,7 +33,7 @@ export default function Layout() {
         name='saved'
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name='md-bookmark' size={size} color={color} />
+            <Ionicons name='bookmark-outline' size={size} color={color} />
           ),
         }}
       />
