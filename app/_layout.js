@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import BackButton from "../components/BackButton";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,13 @@ export default function Layout() {
       <Stack>
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
         <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+        <Stack.Screen
+          name='categories/[slug]'
+          options={{
+            headerLeft: () => <BackButton />,
+            headerTitle: "",
+          }}
+        />
       </Stack>
     </QueryClientProvider>
   );
