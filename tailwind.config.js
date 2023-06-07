@@ -8,6 +8,11 @@ module.exports = {
         "poppins-medium": ["PoppinsMedium"],
         "poppins-bold": ["PoppinsBold"],
       },
+      colors: {
+        primary: "#E6EBF2",
+        secondary: "#81BAB4",
+        tertiary: "#32324D",
+      },
     },
   },
   plugins: [],
