@@ -7,14 +7,6 @@ export default function Search() {
 
   return (
     <View className='p-4'>
-      <View>
-        <Text className='text-gray-500 font-poppins-medium text-base mb-1'>
-          Hello Edwin
-        </Text>
-        <Text className='text-3xl font-poppins-bold text-gray-700 '>
-          What would you like {"\n"} to cook today?
-        </Text>
-      </View>
       <View className='flex-row justify-between space-x-2 mt-3'>
         <View className='flex-row items-center bg-gray-200 rounded-xl flex-1 '>
           <View className='ml-1'>
