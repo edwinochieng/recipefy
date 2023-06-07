@@ -7,7 +7,7 @@ export default function Search() {
   const [filterVisible, setFilterVisible] = useState(false);
 
   return (
-    <View className='p-4'>
+    <View className='px-4'>
       <View className='flex-row justify-between space-x-2 mt-3'>
         <View className='flex-row items-center bg-gray-200 rounded-xl flex-1 '>
           <View className='ml-1'>

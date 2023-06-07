@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Welcome() {
   return (
-    <View>
+    <View className='px-4'>
       <Text className='text-gray-500 font-poppins-medium text-base mb-1'>
         Hello Edwin
       </Text>
