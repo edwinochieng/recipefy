@@ -1,9 +1,10 @@
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Modal, Pressable, Text } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function Search() {
   const [query, setQuery] = useState();
+  const [filterVisible, setFilterVisible] = useState(false);
 
   return (
     <View className='p-4'>
@@ -21,10 +22,23 @@ export default function Search() {
           />
         </View>
 
-        <View className='bg-gray-200 rounded-lg px-2 items-center justify-center  '>
+        <Pressable
+          onPress={() => setFilterVisible((prevValue) => !prevValue)}
+          className='bg-gray-200 rounded-lg px-2 items-center justify-center'
+        >
           <Ionicons name='ios-filter' size={24} color='black' />
-        </View>
+        </Pressable>
       </View>
+      <Modal visible={filterVisible}>
+        <View className='flex-1 justify-center items-center'>
+          <Pressable
+            onPress={() => setFilterVisible(false)}
+            className='bg-red-500 p-2'
+          >
+            <Text>Close</Text>
+          </Pressable>
+        </View>
+      </Modal>
     </View>
   );
 }
