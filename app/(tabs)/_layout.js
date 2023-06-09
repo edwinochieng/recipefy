@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import BackButton from "../../components/BackButton";
 
 export default function Layout() {
   return (
@@ -27,6 +28,7 @@ export default function Layout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='search-outline' size={size} color={color} />
           ),
+          headerTitle: "",
         }}
       />
       <Tabs.Screen
