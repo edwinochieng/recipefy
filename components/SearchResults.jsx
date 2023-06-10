@@ -3,7 +3,7 @@ import React from "react";
 import RecipeCard from "./RecipeCard";
 
 export default function SearchResults({ results }) {
-  if (results.length === 0) {
+  if (results?.length === 0) {
     return (
       <View className='flex-1 justify-center items-center'>
         <Text>Oppss!!No results found</Text>
@@ -21,7 +21,7 @@ export default function SearchResults({ results }) {
         </View>
 
         <View className='flex flex-row flex-wrap justify-between mt-1'>
-          {results.map((recipe) => (
+          {results?.map((recipe) => (
             <View key={recipe.id} className='w-[49%] my-1'>
               <RecipeCard recipe={recipe} />
             </View>
