@@ -1,4 +1,4 @@
-import { View, SafeAreaView, ScrollView } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import React from "react";
 import Search from "../../components/Search";
 import SearchHistory from "../../components/SearchHistory";
