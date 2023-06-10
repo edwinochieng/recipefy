@@ -1,10 +1,11 @@
-import { Tabs } from "expo-router";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import BackButton from "../../components/BackButton";
+import { Tabs, useSearchParams, useRouter } from "expo-router";
+import { Pressable } from "react-native";
+import { MaterialCommunityIcons, Ionicons, Entypo } from "@expo/vector-icons";
 
 export default function Layout() {
+  const { query } = useSearchParams();
+  const router = useRouter();
+
   return (
     <Tabs
       screenOptions={{
@@ -29,6 +30,15 @@ export default function Layout() {
             <Ionicons name='search-outline' size={size} color={color} />
           ),
           headerTitle: "",
+          headerLeft: () =>
+            query && (
+              <Pressable
+                onPress={() => router.push("/search")}
+                className='bg-gray-200 rounded-md p-2 items-center justify-center '
+              >
+                <Ionicons name='chevron-back-sharp' size={20} color='black' />
+              </Pressable>
+            ),
         }}
       />
       <Tabs.Screen
