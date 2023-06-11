@@ -1,9 +1,26 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useFavoriteRecipesStore } from "../store/store";
 
 export default function RecipeCard({ recipe }) {
-  const [isSaved, setIsSaved] = useState(false);
+  const savedRecipes = useFavoriteRecipesStore(
+    (state) => state.favoriteRecipes
+  );
+  const addToFavorites = useFavoriteRecipesStore((state) => state.addRecipe);
+  const removeFromFavorites = useFavoriteRecipesStore(
+    (state) => state.removeFromFavorites
+  );
+
+  const isRecipeSaved = savedRecipes.some((item) => item.id === recipe.id);
+
+  const handleSaveRecipe = () => {
+    if (isRecipeSaved) {
+      removeFromFavorites(recipe.id);
+    } else {
+      addToFavorites(recipe);
+    }
+  };
 
   const imageUri = recipe.image;
   return (
@@ -15,11 +32,11 @@ export default function RecipeCard({ recipe }) {
         />
 
         <View className='absolute top-0 right-5 '>
-          <Pressable onPress={() => setIsSaved(!isSaved)}>
+          <Pressable onPress={handleSaveRecipe}>
             <MaterialIcons
-              name={isSaved ? "favorite" : "favorite-outline"}
+              name={isRecipeSaved ? "favorite" : "favorite-outline"}
               size={24}
-              color='black'
+              color={isRecipeSaved ? "red" : "black"}
             />
           </Pressable>
         </View>
