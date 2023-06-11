@@ -2,14 +2,14 @@ import { View, TextInput, Modal, Pressable, Text } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import useStore from "../store/store";
+import { useSearchHistoryStore } from "../store/store";
 
 export default function Search() {
   const [query, setQuery] = useState("");
   const [filterVisible, setFilterVisible] = useState(false);
 
   const router = useRouter();
-  const saveSearch = useStore((state) => state.addNewSearch);
+  const saveSearch = useSearchHistoryStore((state) => state.addNewSearch);
 
   const handleSearch = () => {
     router.push(`/search?query=${query}`);

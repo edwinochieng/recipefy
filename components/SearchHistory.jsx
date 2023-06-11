@@ -1,10 +1,10 @@
 import { View, Text, FlatList, Pressable } from "react-native";
 import React from "react";
-import useStore from "../store/store";
+import { useSearchHistoryStore } from "../store/store";
 
 export default function SearchHistory() {
-  const searchHistory = useStore((state) => state.searchHistory);
-  const removeSearch = useStore((state) => state.removeSearch);
+  const searchHistory = useSearchHistoryStore((state) => state.searchHistory);
+  const removeSearch = useSearchHistoryStore((state) => state.removeSearch);
   return (
     <View className='flex-1 px-4'>
       {searchHistory.length > 0 ? (
@@ -20,7 +20,7 @@ export default function SearchHistory() {
               renderItem={({ item }) => (
                 <View className='bg-white rounded-md p-2 flex-row justify-between'>
                   <Text>{item.title}</Text>
-                  <Pressable onPress={() => removeSearch()}>
+                  <Pressable onPress={() => removeSearch(item.id)}>
                     <Text>Remove</Text>
                   </Pressable>
                 </View>
