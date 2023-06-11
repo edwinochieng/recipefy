@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const useStore = create((set, get) => ({
+export const useSearchHistoryStore = create((set, get) => ({
   searchHistory: [],
 
   addNewSearch: (newSearch) => {
@@ -17,4 +17,20 @@ const useStore = create((set, get) => ({
   },
 }));
 
-export default useStore;
+export const useFavoriteRecipesStore = create((set, get) => ({
+  favoriteRecipes: [],
+  addRecipe: (recipe) => {
+    set({ favoriteRecipes: [...get().favoriteRecipes, recipe] });
+  },
+
+  removeFromFavorites: (recipe) => {
+    set({
+      favoriteRecipes: get().favoriteRecipes.filter(
+        (item) => item.id !== recipe.id
+      ),
+    });
+  },
+  clearStore: () => {
+    set({ favoriteRecipes: [] });
+  },
+}));
