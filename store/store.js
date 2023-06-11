@@ -19,17 +19,19 @@ export const useSearchHistoryStore = create((set, get) => ({
 
 export const useFavoriteRecipesStore = create((set, get) => ({
   favoriteRecipes: [],
+
   addRecipe: (recipe) => {
     set({ favoriteRecipes: [...get().favoriteRecipes, recipe] });
   },
 
-  removeFromFavorites: (recipe) => {
+  removeFromFavorites: (recipeId) => {
     set({
       favoriteRecipes: get().favoriteRecipes.filter(
-        (item) => item.id !== recipe.id
+        (item) => item.id !== recipeId
       ),
     });
   },
+
   clearStore: () => {
     set({ favoriteRecipes: [] });
   },
