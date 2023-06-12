@@ -3,9 +3,9 @@ import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import app from "../../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 
 export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -25,7 +25,6 @@ export default function SignUp() {
   });
 
   const handleSignUp = async ({ name, email, password }) => {
-    const auth = getAuth(app);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
