@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useSearchHistoryStore } from "../store/store";
+import { diet, mealTypes, cusines } from "../assets/filter";
 
 export default function Search() {
   const [query, setQuery] = useState("");
@@ -52,6 +53,19 @@ export default function Search() {
           >
             <Text>Close</Text>
           </Pressable>
+
+          <View className='flex-1'>
+            <View>
+              <Text>Cuisines</Text>
+              <View className='flex-row flex-wrap'>
+                {cusines.map((item) => (
+                  <View key={item.name}>
+                    <Text>{item.name}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
         </View>
       </Modal>
     </View>
