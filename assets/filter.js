@@ -1,102 +1,53 @@
 import categories from "./categories";
 
 const cusines = [
-  {
-    name: "African",
-  },
-  {
-    name: "Asian",
-  },
-  {
-    name: "Caribbean",
-  },
-  {
-    name: "Chinese",
-  },
-  {
-    name: "French",
-  },
-  {
-    name: "Greek",
-  },
-  {
-    name: "Indian",
-  },
-  {
-    name: "Italian",
-  },
-  {
-    name: "Japanese",
-  },
-  {
-    name: "Korean",
-  },
-  {
-    name: "Mexican",
-  },
-  {
-    name: "Spanish",
-  },
-  {
-    name: "Thai",
-  },
+  "African",
+  "Asian",
+  "Caribbean",
+  "Chinese",
+  "French",
+  "Greek",
+  "Indian",
+  "Italian",
+  "Japanese",
+  "Korean",
+  "Mexican",
+  "Spanish",
+  "Thai",
 ];
 
-const mealTypes = categories;
+const mealTypes = [
+  "Breakfast",
+  "Salad",
+  "Appetizers",
+  "Main course",
+  "Beverage",
+  "Dessert",
+  "Soup",
+  "Drinks",
+  "Snacks",
+];
 
 const diet = [
-  {
-    name: "Vegetarian",
-  },
-  {
-    name: "Gluten Free",
-  },
-  {
-    name: "Lacto-Vegetarian",
-  },
-  {
-    name: "Vegan",
-  },
-  {
-    name: "Primal",
-  },
-  {
-    name: "Paleo",
-  },
+  "Vegetarian",
+  "Gluten Free",
+  "Lacto-Vegetarian",
+  "Vegan",
+  "Primal",
+  "Paleo",
 ];
 
 const intolerances = [
-  {
-    name: "Dairy",
-  },
-  {
-    name: "Egg",
-  },
-  {
-    name: "Gluten",
-  },
-  {
-    name: "Peanut",
-  },
-  {
-    name: "Seafood",
-  },
-  {
-    name: "Sesame",
-  },
-  {
-    name: "Soy",
-  },
-  {
-    name: "Wheat",
-  },
+  "Dairy",
+  "Egg",
+  "Gluten",
+  "Peanut",
+  "Seafood",
+  "Sesame",
+  " Soy",
+  "Wheat",
 ];
 
-const maxPrepationTime = [
-  { time: 15 },
-  { time: 30 },
-  { time: 45 },
-  { time: 60 },
-];
+const maxPrepationTime = [15, 30, 45, 60];
 
 export { cusines, mealTypes, diet, intolerances, maxPrepationTime };
