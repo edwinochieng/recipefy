@@ -65,7 +65,7 @@ const diet = [
   },
 ];
 
-const itolerances = [
+const intolerances = [
   {
     name: "Dairy",
   },
@@ -99,4 +99,4 @@ const maxPrepationTime = [
   { time: 60 },
 ];
 
-export { cusines, mealTypes, diet, itolerances, maxPrepationTime };
+export { cusines, mealTypes, diet, intolerances, maxPrepationTime };
