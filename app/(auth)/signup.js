@@ -39,7 +39,7 @@ export default function SignUp() {
         userId: user.uid,
       });
       console.log("signed in");
-      router.push("/");
+      router.push("/home");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
