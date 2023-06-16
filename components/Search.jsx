@@ -128,8 +128,8 @@ export default function Search() {
 
           <TextInput
             placeholder='Search by food name'
-            value={query}
-            onChangeText={(text) => setQuery(text)}
+            value={searchQuery}
+            onChangeText={(text) => setSearchQuery(text)}
             onSubmitEditing={handleSearch}
             className='p-2 bg-transparent font-poppins flex-1 rounded-xl'
           />
