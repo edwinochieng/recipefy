@@ -3,22 +3,116 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useSearchHistoryStore } from "../store/store";
-import { diet, mealTypes, cusines } from "../assets/filter";
+import {
+  diet,
+  mealTypes,
+  cusines,
+  intolerances,
+  maxPrepationTime,
+} from "../assets/filter";
+
+const SelectionList = ({ title, data, selectedItems, toggleItemSelection }) => {
+  return (
+    <View>
+      <Text className='text-gray-700 font-poppins-bold text-base'>{title}</Text>
+      <View className='flex-row flex-wrap items-center mt-1'>
+        {data.map((item) => (
+          <Pressable
+            onPress={() => toggleItemSelection(item)}
+            key={item}
+            className={`p-[7px] rounded mr-1 my-1 ${
+              selectedItems.includes(item)
+                ? "bg-cyan-400 text-white"
+                : "bg-gray-300 text-black"
+            }`}
+          >
+            <Text className='font-poppins-medium text-xs'>{item}</Text>
+          </Pressable>
+        ))}
+      </View>
+    </View>
+  );
+};
 
 export default function Search() {
-  const [query, setQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [filterVisible, setFilterVisible] = useState(false);
+  const [selectedCuisines, setSelectedCuisines] = useState([]);
+  const [selectedDiets, setSelectedDiets] = useState([]);
+  const [selectedIntolerances, setSelectedIntolerances] = useState([]);
+  const [selectedMealTypes, setSelectedMealtypes] = useState([]);
+  const [selectedMaxTime, setSelectedMaxTime] = useState([]);
+
+  const toggleCuisineSelection = (cuisine) => {
+    if (selectedCuisines.includes(cuisine)) {
+      setSelectedCuisines(selectedCuisines.filter((c) => c !== cuisine));
+    } else {
+      setSelectedCuisines([...selectedCuisines, cuisine]);
+    }
+  };
+
+  const toggleDietSelection = (diet) => {
+    if (selectedDiets.includes(diet)) {
+      setSelectedDiets(selectedDiets.filter((d) => d !== diet));
+    } else {
+      setSelectedDiets([...selectedDiets, diet]);
+    }
+  };
+
+  const toggleIntoleranceSelection = (intolerance) => {
+    if (selectedIntolerances.includes(intolerance)) {
+      setSelectedIntolerances(
+        selectedIntolerances.filter((i) => i !== intolerance)
+      );
+    } else {
+      setSelectedIntolerances([...selectedIntolerances, intolerance]);
+    }
+  };
+  const toggleMealTypeSelection = (mealType) => {
+    if (selectedMealTypes.includes(mealType)) {
+      setSelectedMealtypes(selectedMealTypes.filter((m) => m !== mealType));
+    } else {
+      setSelectedMealtypes([...selectedMealTypes, mealType]);
+    }
+  };
+  const toggleMaxTimeSelection = (maxTime) => {
+    if (selectedMaxTime.includes(maxTime)) {
+      setSelectedMaxTime(selectedMaxTime.filter((t) => t !== maxTime));
+    } else {
+      setSelectedMaxTime([...selectedMaxTime, maxTime]);
+    }
+  };
+
+  const generateQueryString = () => {
+    const query = [];
+    if (selectedCuisines.length > 0) {
+      query.push(`cuisine=${selectedCuisines.join(",")}`);
+    }
+    if (selectedDiets.length > 0) {
+      query.push(`diet=${selectedDiets.join(",")}`);
+    }
+    if (selectedIntolerances.length > 0) {
+      query.push(`intolerance=${selectedIntolerances.join(",")}`);
+    }
+    if (selectedMealTypes.length > 0) {
+      query.push(`type=${selectedMealTypes.join(",")}`);
+    }
+    if (selectedMaxTime.length > 0) {
+      query.push(`maxReadyTime=${selectedMaxTime.join(",")}`);
+    }
+    return query.join("&");
+  };
 
   const router = useRouter();
   const saveSearch = useSearchHistoryStore((state) => state.addNewSearch);
 
   const handleSearch = () => {
-    router.push(`/search?query=${query}`);
+    router.push(`/search?query=${searchQuery}`);
     saveSearch({
       id: Math.floor(Math.random() * 10000),
-      title: query,
+      title: searchQuery,
     });
-    setQuery("");
+    setSearchQuery("");
   };
 
   return (
@@ -46,25 +140,47 @@ export default function Search() {
         </Pressable>
       </View>
       <Modal visible={filterVisible}>
-        <View className='flex-1 justify-center items-center'>
-          <Pressable
-            onPress={() => setFilterVisible(false)}
-            className='bg-red-500 p-2'
-          >
-            <Text>Close</Text>
-          </Pressable>
+        <View className='relative flex-1 justify-center items-center px-4'>
+          <View className='absolute top-0 right-5'>
+            <Pressable
+              onPress={() => setFilterVisible(false)}
+              className='bg-red-500 p-2'
+            >
+              <Text>Close</Text>
+            </Pressable>
+          </View>
 
-          <View className='flex-1'>
-            <View>
-              <Text>Cuisines</Text>
-              <View className='flex-row flex-wrap'>
-                {cusines.map((item) => (
-                  <View key={item.name}>
-                    <Text>{item.name}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
+          <View className='flex-1 mt-10'>
+            <SelectionList
+              title='Cuisines'
+              data={cusines}
+              selectedItems={selectedCuisines}
+              toggleItemSelection={toggleCuisineSelection}
+            />
+            <SelectionList
+              title='Diet'
+              data={diet}
+              selectedItems={selectedDiets}
+              toggleItemSelection={toggleDietSelection}
+            />
+            <SelectionList
+              title='Meal Type'
+              data={mealTypes}
+              selectedItems={selectedMealTypes}
+              toggleItemSelection={toggleMealTypeSelection}
+            />
+            <SelectionList
+              title='Maximum Preparation time'
+              data={maxPrepationTime}
+              selectedItems={selectedMaxTime}
+              toggleItemSelection={toggleMaxTimeSelection}
+            />
+            <SelectionList
+              title='Intolerances'
+              data={intolerances}
+              selectedItems={selectedIntolerances}
+              toggleItemSelection={toggleIntoleranceSelection}
+            />
           </View>
         </View>
       </Modal>
