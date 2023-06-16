@@ -83,31 +83,34 @@ export default function Search() {
     }
   };
 
-  const generateQueryString = () => {
-    const query = [];
-    if (selectedCuisines.length > 0) {
-      query.push(`cuisine=${selectedCuisines.join(",")}`);
-    }
-    if (selectedDiets.length > 0) {
-      query.push(`diet=${selectedDiets.join(",")}`);
-    }
-    if (selectedIntolerances.length > 0) {
-      query.push(`intolerance=${selectedIntolerances.join(",")}`);
-    }
-    if (selectedMealTypes.length > 0) {
-      query.push(`type=${selectedMealTypes.join(",")}`);
-    }
-    if (selectedMaxTime.length > 0) {
-      query.push(`maxReadyTime=${selectedMaxTime.join(",")}`);
-    }
-    return query.join("&");
-  };
-
   const router = useRouter();
   const saveSearch = useSearchHistoryStore((state) => state.addNewSearch);
 
   const handleSearch = () => {
-    router.push(`/search?query=${searchQuery}`);
+    let url = `/search?query=${searchQuery}`;
+
+    if (selectedCuisines.length > 0) {
+      url += `&cuisine=${selectedCuisines.join(",")}`;
+    }
+
+    if (selectedDiets.length > 0) {
+      url += `&diet=${selectedDiets.join(",")}`;
+    }
+
+    if (selectedIntolerances.length > 0) {
+      url += `&intolerances=${selectedIntolerances.join(",")}`;
+    }
+
+    if (selectedMealTypes.length > 0) {
+      url += `&type=${selectedMealTypes.join(",")}`;
+    }
+
+    if (selectedMaxTime.length > 0) {
+      url += `&maxReadyTime=${selectedMaxTime.join(",")}`;
+    }
+
+    router.push(url);
+
     saveSearch({
       id: Math.floor(Math.random() * 10000),
       title: searchQuery,
