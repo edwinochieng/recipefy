@@ -38,8 +38,9 @@ export default function SignUp() {
         email: email,
         userId: user.uid,
       });
-      console.log("signed in");
-      router.push("/home");
+
+      console.log("Signed up and user data stored in Firestore");
+      router.replace("/home");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -150,7 +151,7 @@ export default function SignUp() {
           <View className='flex-row justify-center mt-5'>
             <Text>Already have an account?</Text>
             <Text
-              onPress={() => router.push("auth/login")}
+              onPress={() => router.push("login")}
               className='ml-1 text-blue-600'
             >
               Log in
