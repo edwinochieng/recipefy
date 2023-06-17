@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 
 export default function Login() {
@@ -27,7 +27,7 @@ export default function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
 
-        router.push("/");
+        router.replace("/home");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -117,7 +117,7 @@ export default function Login() {
           <View className='flex-row justify-center mt-5'>
             <Text>Don't have an account?</Text>
             <Text
-              onPress={() => router.push("auth/signup")}
+              onPress={() => router.push("signup")}
               className='ml-1 text-blue-600'
             >
               Sign up
