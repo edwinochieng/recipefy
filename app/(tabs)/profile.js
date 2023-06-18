@@ -1,10 +1,21 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { useRouter } from "expo-router";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 export default function Profile() {
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    signOut(auth);
+    router.replace("/login");
+  };
   return (
     <View>
-      <Text>Profile</Text>
+      <Text onPress={handleSignOut} className='bg-red-500 p-3 my-2'>
+        Log Out
+      </Text>
     </View>
   );
 }
