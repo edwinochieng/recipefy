@@ -117,7 +117,7 @@ export default function Login() {
           <View className='flex-row justify-center mt-5'>
             <Text>Don't have an account?</Text>
             <Text
-              onPress={() => router.push("signup")}
+              onPress={() => router.push("/signup")}
               className='ml-1 text-blue-600'
             >
               Sign up
