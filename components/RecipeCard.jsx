@@ -2,8 +2,11 @@ import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useFavoriteRecipesStore } from "../store/store";
+import { useRouter } from "expo-router";
 
 export default function RecipeCard({ recipe }) {
+  const router = useRouter();
+
   const savedRecipes = useFavoriteRecipesStore(
     (state) => state.favoriteRecipes
   );
@@ -24,7 +27,10 @@ export default function RecipeCard({ recipe }) {
 
   const imageUri = recipe.image;
   return (
-    <View className='bg-white rounded-lg'>
+    <Pressable
+      onPress={() => router.push(`/details/${recipe.id}`)}
+      className='bg-white rounded-lg'
+    >
       <View className='relative'>
         <Image
           source={{ uri: imageUri }}
@@ -47,6 +53,6 @@ export default function RecipeCard({ recipe }) {
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
