@@ -28,6 +28,13 @@ export default function Layout() {
             headerTitle: "",
           }}
         />
+        <Stack.Screen
+          name='details/[id]'
+          options={{
+            headerLeft: () => <BackButton />,
+            headerTitle: "",
+          }}
+        />
       </Stack>
     </QueryClientProvider>
   );
