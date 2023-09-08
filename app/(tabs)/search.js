@@ -6,7 +6,6 @@ import axios from "axios";
 import { useLocalSearchParams } from "expo-router";
 import SearchResults from "../../components/SearchResults";
 import { useQuery } from "@tanstack/react-query";
-import { SPOONACULAR_API_KEY } from "@env";
 
 const url = "https://api.spoonacular.com/recipes/complexSearch";
 
@@ -41,7 +40,7 @@ export default function SearchScreen() {
 
   const fetchRecipes = async () => {
     const res = await axios.get(
-      `${url}?apiKey=${SPOONACULAR_API_KEY}${
+      `${url}?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}${
         queryString ? `&${queryString}` : ""
       }`
     );

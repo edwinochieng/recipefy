@@ -2,7 +2,6 @@ import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { SPOONACULAR_API_KEY } from "@env";
 import RecipeCard from "./RecipeCard";
 
 const url = "https://api.spoonacular.com/recipes/random";
@@ -10,7 +9,7 @@ const url = "https://api.spoonacular.com/recipes/random";
 export default function PopularRecipes() {
   const fetchPopularRecipes = async () => {
     const res = await axios.get(
-      `${url}?apiKey=${SPOONACULAR_API_KEY}&number=8`
+      `${url}?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}&number=8`
     );
 
     return res.data;

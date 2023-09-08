@@ -2,7 +2,6 @@ import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { SPOONACULAR_API_KEY } from "@env";
 import RecipeCard from "../../components/RecipeCard";
 import axios from "axios";
 
@@ -13,7 +12,7 @@ export default function Categories() {
 
   const fetchRecipes = async () => {
     const res = await axios.get(
-      `${url}?apiKey=${SPOONACULAR_API_KEY}&number=20&tags=${slug}`
+      `${url}?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}&number=20&tags=${slug}`
     );
 
     return res.data;

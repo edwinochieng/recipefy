@@ -9,7 +9,7 @@ export default function RecipeDetails() {
 
   const fetchRecipeDetails = async () => {
     const res = await axios.get(
-      `${url}/${id}/information?apiKey=${SPOONACULAR_API_KEY}`
+      `${url}/${id}/information?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}`
     );
 
     return res.data;
