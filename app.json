@@ -5,6 +5,9 @@
       "bundler": "metro"
     },
     "name": "recipefy",
-    "slug": "recipefy"
+    "slug": "recipefy",
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
