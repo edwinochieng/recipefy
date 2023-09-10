@@ -3,9 +3,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "ts:check": "tsc"
   },
   "dependencies": {
+    "@expo/ngrok": "^4.1.0",
     "@tanstack/react-query": "^4.29.12",
     "axios": "^1.4.0",
     "babel-preset-expo": "^9.5.2",
@@ -28,7 +30,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
     "tailwindcss": "^3.3.2",
-    "zustand": "^4.3.8"
+    "zustand": "^4.3.8",
+    "@types/react": "~18.2.14"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"
