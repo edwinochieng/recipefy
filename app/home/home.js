@@ -6,7 +6,7 @@ import Recommendation from "../../components/Recommendation";
 import PopularRecipes from "../../components/PopularRecipes";
 import Welcome from "../../components/Welcome";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <SafeAreaView className='flex-1'>
       <ScrollView showsVerticalScrollIndicator={false}>
