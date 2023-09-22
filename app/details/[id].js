@@ -1,6 +1,8 @@
 import { View, Text, ImageBackground } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const url = "https://api.spoonacular.com/recipes";
 
