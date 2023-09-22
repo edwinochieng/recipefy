@@ -11,11 +11,23 @@ const url = "https://api.spoonacular.com/recipes/complexSearch";
 
 export default function SearchScreen() {
   const { query } = useLocalSearchParams();
+  const fetchRecipes = async () => {
+    const res = await axios.get(
+      `${url}?apiKey=${SPOONACULAR_API_KEY}&query=${query}`
+    );
+
+    return res.data;
+  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["searchResults"],
+    queryFn: fetchRecipes,
+  });
+  const results = data?.results;
 
   return (
     <SafeAreaView className='flex-1'>
       {query ? (
-        <SearchResults />
+        <SearchResults results={results} />
       ) : (
         <View className='flex-1 py-2'>
           <Search />
