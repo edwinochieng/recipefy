@@ -17,7 +17,7 @@ export default function SearchScreen() {
       {query ? (
         <SearchResults />
       ) : (
-        <View className='flex-1'>
+        <View className='flex-1 py-2'>
           <Search />
           <SearchHistory />
         </View>
