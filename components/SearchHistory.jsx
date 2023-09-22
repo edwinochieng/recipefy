@@ -30,7 +30,7 @@ export default function SearchHistory() {
         </View>
       ) : (
         <View className='flex-1 justify-center item-center'>
-          <Text className='text-2xl'>Search recipes</Text>
+          <Text className='text-2xl text-center'>Search recipes</Text>
         </View>
       )}
     </View>
