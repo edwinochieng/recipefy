@@ -13,7 +13,7 @@ export default function SearchScreen() {
   const { query } = useLocalSearchParams();
   const fetchRecipes = async () => {
     const res = await axios.get(
-      `${url}?apiKey=${SPOONACULAR_API_KEY}&query=${query}`
+      `${url}?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}&query=${query}`
     );
 
     return res.data;
