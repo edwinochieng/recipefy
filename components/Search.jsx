@@ -23,7 +23,7 @@ export default function Search() {
   };
 
   return (
-    <View className='px-4'>
+    <View className='px-4 h-11'>
       <View className='flex-row items-center bg-gray-200 rounded-xl flex-1 '>
         <View className='ml-1'>
           <Ionicons name='search' size={22} color='gray' />
