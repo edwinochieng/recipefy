@@ -1,9 +1,10 @@
-import { Tabs, useRouter } from "expo-router";
+import { Tabs, useGlobalSearchParams, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import { MaterialCommunityIcons, Ionicons, Entypo } from "@expo/vector-icons";
 
 export default function Layout() {
   const router = useRouter();
+  const { query } = useGlobalSearchParams();
 
   return (
     <Tabs
