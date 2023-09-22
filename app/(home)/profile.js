@@ -9,7 +9,7 @@ export default function Profile() {
 
   const handleSignOut = () => {
     signOut(auth);
-    router.push("/auth/login");
+    router.push("/login");
   };
   return (
     <View>

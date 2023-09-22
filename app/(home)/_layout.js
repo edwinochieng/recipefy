@@ -1,9 +1,8 @@
-import { Tabs, useSearchParams, useRouter } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import { MaterialCommunityIcons, Ionicons, Entypo } from "@expo/vector-icons";
 
 export default function Layout() {
-  const { query } = useSearchParams();
   const router = useRouter();
 
   return (
@@ -14,7 +13,7 @@ export default function Layout() {
       }}
     >
       <Tabs.Screen
-        name='home'
+        name='index'
         options={{
           tabBarIcon: ({ color, size }) => (
             <Entypo name='home' size={size} color={color} />
