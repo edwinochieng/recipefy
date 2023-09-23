@@ -33,7 +33,7 @@ export default function Login() {
       );
       const user = userCredential.user;
       console.log("Logged in");
-      router.replace("/home/home");
+      router.replace("/");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
