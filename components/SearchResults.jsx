@@ -1,8 +1,25 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import RecipeCard from "./RecipeCard";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-export default function SearchResults({ results }) {
+const url = "https://api.spoonacular.com/recipes/complexSearch";
+
+export default function SearchResults({ searchQuery }) {
+  const fetchRecipes = async () => {
+    const res = await axios.get(
+      `${url}?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}&query=${searchQuery}`
+    );
+
+    return res.data;
+  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["searchResults"],
+    queryFn: fetchRecipes,
+  });
+  const results = data?.results;
+
   if (results?.length === 0) {
     return (
       <View className='flex-1 justify-center items-center'>
