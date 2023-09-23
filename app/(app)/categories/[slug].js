@@ -2,12 +2,13 @@ import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import RecipeCard from "../../components/RecipeCard";
+
 import axios from "axios";
+import RecipeCard from "../../../components/RecipeCard";
 
 const url = "https://api.spoonacular.com/recipes/random";
 
-export default function Categories() {
+export default function CategoriesPage() {
   const { slug } = useLocalSearchParams();
 
   const fetchRecipes = async () => {

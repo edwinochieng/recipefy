@@ -1,9 +1,9 @@
 import { View, SafeAreaView } from "react-native";
 import React from "react";
-import Search from "../../components/Search";
-import SearchHistory from "../../components/SearchHistory";
+import Search from "../../../components/Search";
+import SearchHistory from "../../../components/SearchHistory";
 import { useLocalSearchParams } from "expo-router";
-import SearchResults from "../../components/SearchResults";
+import SearchResults from "../../../components/SearchResults";
 
 export default function SearchScreen() {
   const { query } = useLocalSearchParams();

@@ -3,10 +3,10 @@ import { View, Text, TextInput, Pressable, SafeAreaView } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
-export default function Login() {
+export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const router = useRouter();
@@ -22,9 +22,9 @@ export default function Login() {
     },
   });
 
-  const handleSignIn = async ({ email, password }) => {
+  const handleSignUp = async ({ email, password }) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
@@ -41,7 +41,7 @@ export default function Login() {
     <SafeAreaView className='flex-1 bg-white'>
       <View className='flex-1 p-4 absolute top-[10%]'>
         <View className='mb-10'>
-          <Text className='text-2xl font-bold text-gray-800'>Log in</Text>
+          <Text className='text-2xl font-bold text-gray-800'>Sign Up</Text>
         </View>
 
         <Controller
@@ -108,21 +108,21 @@ export default function Login() {
           <View>
             <Pressable
               className='bg-blue-600 py-3 rounded-lg'
-              onPress={handleSubmit(handleSignIn)}
+              onPress={handleSubmit(handleSignUp)}
             >
               <Text className='text-white text-center font-semibold text-lg'>
-                Continue
+                Sign Up
               </Text>
             </Pressable>
           </View>
 
           <View className='flex-row justify-center mt-5'>
-            <Text>Dont have an account?</Text>
+            <Text>Already have an account?</Text>
             <Text
-              onPress={() => router.push("/signup")}
+              onPress={() => router.push("/login")}
               className='ml-1 text-blue-600'
             >
-              Sign up
+              Log in
             </Text>
           </View>
         </View>

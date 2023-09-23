@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";
-import { UserAuth } from "../../auth/AuthContext";
+import { UserAuth } from "../../../auth/AuthContext";
 
 export default function Profile() {
   const router = useRouter();

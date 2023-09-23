@@ -25,7 +25,7 @@ export default function RecipeDetails() {
   return (
     <View className='flex-1'>
       <ImageBackground
-        source={require("../../assets/icons/meal.png")}
+        source={require("../../../assets/icons/meal.png")}
         className='flex-1'
       >
         <View className='bg-black bg-opacity-50 p-4'>

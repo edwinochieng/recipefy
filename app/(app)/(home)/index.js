@@ -1,10 +1,10 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
 import React from "react";
-import Search from "../../components/Search";
-import Categories from "../../components/Categories";
-import Recommendation from "../../components/Recommendation";
-import PopularRecipes from "../../components/PopularRecipes";
-import Welcome from "../../components/Welcome";
+import Welcome from "../../../components/Welcome";
+import Search from "../../../components/Search";
+import Categories from "../../../components/Categories";
+import Recommendation from "../../../components/Recommendation";
+import PopularRecipes from "../../../components/PopularRecipes";
 
 export default function HomePage() {
   return (

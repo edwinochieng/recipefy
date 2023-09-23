@@ -1,7 +1,7 @@
 import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import React from "react";
-import RecipeCard from "../../components/RecipeCard";
-import { useFavoriteRecipesStore } from "../../store/store";
+import RecipeCard from "../../../components/RecipeCard";
+import { useFavoriteRecipesStore } from "../../../store/store";
 
 export default function Saved() {
   const favoriteRecipes = useFavoriteRecipesStore(
