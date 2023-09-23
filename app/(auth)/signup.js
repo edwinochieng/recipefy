@@ -4,8 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
-import { auth, db } from "../../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 
 export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -18,15 +17,12 @@ export default function SignUp() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   });
 
   const handleSignUp = async ({ email, password }) => {
-    console.log(email);
-    console.log(password);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -34,14 +30,10 @@ export default function SignUp() {
         password
       );
       const user = userCredential.user;
-
-      console.log("Signed up ");
-      router.replace("/");
+      router.push("/");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-
-      console.log(errorMessage);
     }
   };
 
