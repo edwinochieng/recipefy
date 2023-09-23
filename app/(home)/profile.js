@@ -1,14 +1,14 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { UserAuth } from "../../auth/AuthContext";
 
 export default function Profile() {
   const router = useRouter();
+  const { user, logOut } = UserAuth();
 
   const handleSignOut = () => {
-    signOut(auth);
+    logOut();
     router.push("/login");
   };
   return (
