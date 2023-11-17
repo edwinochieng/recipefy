@@ -1,6 +1,6 @@
 import { Tabs, useGlobalSearchParams, useRouter } from "expo-router";
 import { Pressable } from "react-native";
-import { MaterialCommunityIcons, Ionicons, Entypo } from "@expo/vector-icons";
+import { Ionicons, Entypo } from "@expo/vector-icons";
 
 export default function Layout() {
   const router = useRouter();
@@ -46,14 +46,6 @@ export default function Layout() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='bookmark-outline' size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name='profile'
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name='account' size={size} color={color} />
           ),
         }}
       />
