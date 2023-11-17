@@ -1,7 +1,6 @@
 import { Slot } from "expo-router";
 import { useFonts } from "expo-font";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthContextProvider } from "../auth/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -17,10 +16,8 @@ export default function Layout() {
   }
 
   return (
-    <AuthContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <Slot />
-      </QueryClientProvider>
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <Slot />
+    </QueryClientProvider>
   );
 }
