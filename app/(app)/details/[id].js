@@ -1,17 +1,19 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView, Pressable } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useFavoriteRecipesStore } from "../../../store/store";
 
 const url = "https://api.spoonacular.com/recipes";
 
 export default function RecipeDetails() {
-  const { id } = useLocalSearchParams();
+  const { recipeId } = useLocalSearchParams();
 
   const fetchRecipeDetails = async () => {
     const res = await axios.get(
-      `${url}/${id}/information?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}`
+      `${url}/${recipeId}/information?apiKey=${process.env.EXPO_PUBLIC_SPOONACULAR_API_KEY}`
     );
 
     return res.data;
@@ -22,39 +24,71 @@ export default function RecipeDetails() {
     queryKey: ["recipeDetails"],
   });
 
+  const savedRecipes = useFavoriteRecipesStore(
+    (state) => state.favoriteRecipes
+  );
+  const addToFavorites = useFavoriteRecipesStore((state) => state.addRecipe);
+  const removeFromFavorites = useFavoriteRecipesStore(
+    (state) => state.removeFromFavorites
+  );
+
+  const isRecipeSaved = savedRecipes.some((item) => item.id === recipeId);
+
+  const handleSaveRecipe = () => {
+    if (isRecipeSaved) {
+      removeFromFavorites(recipeId);
+    } else {
+      addToFavorites(data);
+    }
+  };
+  const imageUri = data.image;
   return (
     <View className='flex-1'>
       <View>
-        <Image source={require("../../../assets/icons/meal.png")}></Image>
+        <Image source={{ uri: imageUri }} className='h-[250px]' />
       </View>
-
-      <ScrollView style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
-        <View className='p-4'>
+      <View className='flex-1 bg-gray-100 p-4'>
+        <View className='flex-row space-x-2'>
           <Text className='text-white text-2xl font-bold mb-2'>
-            Delicious Recipe Title
+            {data.title}
           </Text>
-          <Text className='text-white mb-4'>
-            This is a description of the recipe. It provides some details about
-            the dish, its ingredients, and any special instructions or notes.
-          </Text>
-          <Text className='text-white text-lg font-bold mb-2'>
-            Ingredients:
-          </Text>
-          <Text className='text-white mb-4'>
-            - Ingredient 1{"\n"}- Ingredient 2{"\n"}- Ingredient 3{"\n"}
-            ...
-          </Text>
-          <Text className='text-white text-lg font-bold mb-2'>
-            Instructions:
-          </Text>
-          <Text className='text-white'>
-            1. Step 1: Do something{"\n"}
-            2. Step 2: Do something else{"\n"}
-            3. Step 3: Keep going...{"\n"}
-            ...
-          </Text>
+
+          <View className='absolute top-0 right-5 '>
+            <Pressable onPress={handleSaveRecipe}>
+              <MaterialIcons
+                name={isRecipeSaved ? "favorite" : "favorite-outline"}
+                size={24}
+                color={isRecipeSaved ? "red" : "black"}
+              />
+            </Pressable>
+          </View>
         </View>
-      </ScrollView>
+        <ScrollView>
+          <View>
+            <Text className='text-white mb-4'>
+              This is a description of the recipe. It provides some details
+              about the dish, its ingredients, and any special instructions or
+              notes.
+            </Text>
+            <Text className='text-white text-lg font-bold mb-2'>
+              Ingredients:
+            </Text>
+            <Text className='text-white mb-4'>
+              - Ingredient 1{"\n"}- Ingredient 2{"\n"}- Ingredient 3{"\n"}
+              ...
+            </Text>
+            <Text className='text-white text-lg font-bold mb-2'>
+              Instructions:
+            </Text>
+            <Text className='text-white'>
+              1. Step 1: Do something{"\n"}
+              2. Step 2: Do something else{"\n"}
+              3. Step 3: Keep going...{"\n"}
+              ...
+            </Text>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 }
