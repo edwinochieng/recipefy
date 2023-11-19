@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground } from "react-native";
+import { View, Text, Image, ScrollView } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
@@ -24,11 +24,12 @@ export default function RecipeDetails() {
 
   return (
     <View className='flex-1'>
-      <ImageBackground
-        source={require("../../../assets/icons/meal.png")}
-        className='flex-1'
-      >
-        <View className='bg-black bg-opacity-50 p-4'>
+      <View>
+        <Image source={require("../../../assets/icons/meal.png")}></Image>
+      </View>
+
+      <ScrollView style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+        <View className='p-4'>
           <Text className='text-white text-2xl font-bold mb-2'>
             Delicious Recipe Title
           </Text>
@@ -39,7 +40,7 @@ export default function RecipeDetails() {
           <Text className='text-white text-lg font-bold mb-2'>
             Ingredients:
           </Text>
-          <Text children='text-white mb-4'>
+          <Text className='text-white mb-4'>
             - Ingredient 1{"\n"}- Ingredient 2{"\n"}- Ingredient 3{"\n"}
             ...
           </Text>
@@ -53,7 +54,7 @@ export default function RecipeDetails() {
             ...
           </Text>
         </View>
-      </ImageBackground>
+      </ScrollView>
     </View>
   );
 }
