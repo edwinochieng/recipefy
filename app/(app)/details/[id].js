@@ -9,7 +9,8 @@ import { useFavoriteRecipesStore } from "../../../store/store";
 const url = "https://api.spoonacular.com/recipes";
 
 export default function RecipeDetails() {
-  const { recipeId } = useLocalSearchParams();
+  const { id } = useLocalSearchParams();
+  const recipeId = id;
 
   const fetchRecipeDetails = async () => {
     const res = await axios.get(
@@ -41,7 +42,7 @@ export default function RecipeDetails() {
       addToFavorites(data);
     }
   };
-  const imageUri = data.image;
+  const imageUri = data?.image;
   return (
     <View className='flex-1'>
       <View>
@@ -49,8 +50,8 @@ export default function RecipeDetails() {
       </View>
       <View className='flex-1 bg-gray-100 p-4'>
         <View className='flex-row space-x-2'>
-          <Text className='text-white text-2xl font-bold mb-2'>
-            {data.title}
+          <Text className='text-gray-900 text-2xl font-bold mb-2'>
+            {data?.title}
           </Text>
 
           <View className='absolute top-0 right-5 '>
