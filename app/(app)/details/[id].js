@@ -49,7 +49,7 @@ export default function RecipeDetails() {
         <Image source={{ uri: imageUri }} className='h-[250px]' />
       </View>
       <View className='flex-1 bg-gray-100 p-4'>
-        <View className='flex-row space-x-2'>
+        <View className='flex-row space-x-2 w-full'>
           <Text className='text-gray-900 text-2xl font-bold mb-2'>
             {data?.title}
           </Text>
@@ -66,27 +66,38 @@ export default function RecipeDetails() {
         </View>
         <ScrollView>
           <View>
-            <Text className='text-white mb-4'>
-              This is a description of the recipe. It provides some details
-              about the dish, its ingredients, and any special instructions or
-              notes.
-            </Text>
-            <Text className='text-white text-lg font-bold mb-2'>
-              Ingredients:
-            </Text>
-            <Text className='text-white mb-4'>
-              - Ingredient 1{"\n"}- Ingredient 2{"\n"}- Ingredient 3{"\n"}
-              ...
-            </Text>
-            <Text className='text-white text-lg font-bold mb-2'>
-              Instructions:
-            </Text>
-            <Text className='text-white'>
-              1. Step 1: Do something{"\n"}
-              2. Step 2: Do something else{"\n"}
-              3. Step 3: Keep going...{"\n"}
-              ...
-            </Text>
+            <View>
+              <Text className='text-gray-900 text-lg font-bold mb-2'>
+                Ingredients:
+              </Text>
+              <View>
+                {data?.extendedIngridients.map((ingridient) => (
+                  <View
+                    key={ingridient.id}
+                    className='w-full flex-row justify-between text-black'
+                  >
+                    <View>
+                      <Text>{ingridient.name}</Text>
+                    </View>
+
+                    <View>
+                      <Text>{ingridient.amount} </Text>
+                      <Text>{ingridient.unit} </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </View>
+
+            <View className='pt-[7px]'>
+              <Text className='font-semibold text-[16px] text-gray-700'>
+                Preparation
+              </Text>
+              <Text
+                className='font-medium text-gray-700 text-[16px]'
+                dangerouslySetInnerHTML={{ __html: data?.instructions }}
+              ></Text>
+            </View>
           </View>
         </ScrollView>
       </View>
