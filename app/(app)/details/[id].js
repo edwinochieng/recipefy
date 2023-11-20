@@ -33,11 +33,11 @@ export default function RecipeDetails() {
     (state) => state.removeFromFavorites
   );
 
-  const isRecipeSaved = savedRecipes.some((item) => item.id === recipeId);
+  const isRecipeSaved = savedRecipes.some((item) => item.id === data?.id);
 
   const handleSaveRecipe = () => {
     if (isRecipeSaved) {
-      removeFromFavorites(recipeId);
+      removeFromFavorites(data?.id);
     } else {
       addToFavorites(data);
     }
@@ -54,7 +54,7 @@ export default function RecipeDetails() {
             {data?.title}
           </Text>
 
-          <View className='absolute top-0 right-5 '>
+          <View className='flex-row justify-end'>
             <Pressable onPress={handleSaveRecipe}>
               <MaterialIcons
                 name={isRecipeSaved ? "favorite" : "favorite-outline"}
