@@ -5,10 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useFavoriteRecipesStore } from "../../../store/store";
+import HTML from "react-native-render-html";
+import { useWindowDimensions } from "react-native";
 
 const url = "https://api.spoonacular.com/recipes";
 
 export default function RecipeDetails() {
+  const { width } = useWindowDimensions();
   const { id } = useLocalSearchParams();
   const recipeId = id;
 
@@ -43,6 +46,7 @@ export default function RecipeDetails() {
     }
   };
   const imageUri = data?.image;
+  const htmlContent = data?.instructions;
   return (
     <View className='flex-1'>
       <View>
@@ -71,32 +75,26 @@ export default function RecipeDetails() {
                 Ingredients:
               </Text>
               <View>
-                {data?.extendedIngridients.map((ingridient) => (
+                {data?.extendedIngredients.map((ingredient) => (
                   <View
-                    key={ingridient.id}
+                    key={ingredient.id}
                     className='w-full flex-row justify-between text-black'
                   >
                     <View>
-                      <Text>{ingridient.name}</Text>
-                    </View>
-
-                    <View>
-                      <Text>{ingridient.amount} </Text>
-                      <Text>{ingridient.unit} </Text>
+                      <Text>{ingredient.original}</Text>
                     </View>
                   </View>
                 ))}
               </View>
             </View>
 
-            <View className='pt-[7px]'>
+            <View className='pt-[7px] text-gray-500'>
               <Text className='font-semibold text-[16px] text-gray-700'>
                 Preparation
               </Text>
-              <Text
-                className='font-medium text-gray-700 text-[16px]'
-                dangerouslySetInnerHTML={{ __html: data?.instructions }}
-              ></Text>
+              <View className='flex-1 w-full'>
+                <HTML source={{ html: htmlContent }} contentWidth={width} />
+              </View>
             </View>
           </View>
         </ScrollView>
